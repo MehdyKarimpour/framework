@@ -17,6 +17,7 @@ export interface ValueSearchControlLineProps extends React.Props<ValueSearchCont
   ctx: StyleContext;
   findOptions?: FindOptions;
   valueToken?: string | QueryTokenString<any>;
+  unitText?: React.ReactChild;
   labelText?: React.ReactChild;
   labelHtmlAttributes?: React.HTMLAttributes<HTMLLabelElement>;
   formGroupHtmlAttributes?: React.HTMLAttributes<HTMLDivElement>;
@@ -94,7 +95,7 @@ export default class ValueSearchControlLine extends React.Component<ValueSearchC
     let isBadge = coalesce(this.props.isBadge, this.props.valueToken == undefined ? "MoreThanZero" as "MoreThanZero" : false);
     let isFormControl = coalesce(this.props.isFormControl, this.props.valueToken != undefined);
 
-    let unit = isFormControl && token && token.unit && <span className="input-group-text">{token.unit}</span>;
+    let unit = isFormControl && token && (this.props.unitText || token.unit) && <span className="input-group-text">{this.props.unitText || token.unit}</span>;
 
 
     let value = this.valueSearchControl && this.valueSearchControl.state.value;
